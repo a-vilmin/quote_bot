@@ -1,6 +1,5 @@
-import tweepy, time, sys, wikiquote
-
-
+from sys import argv
+import tweepy, wikiquote
 class bot():
 
     def __init__(self):
