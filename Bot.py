@@ -1,5 +1,5 @@
 from sys import argv
-from random import sample, randint
+from random import sample, shuffle
 import tweepy, wikiquote
 
 class Bot():
@@ -67,13 +67,13 @@ class Bot():
         """pull quote out and tweet it"""
         key = sample(list(self.__topics), 1)[0]
             
-        end = len(self.__topics[key])
-        index = randint(0, end-1)
+        shuffle(self.__topics[key])
             
-        tweet = self.__topics[key].pop(index)
-        print(tweet)
-        self.__api.update_status(tweet)
-    
+        tweet = self.__topics[key].pop()
+        try:
+            self.__api.update_status(tweet)
+        except:
+            pass
         
 if __name__ == '__main__':
     new_bot = Bot()
