@@ -6,8 +6,8 @@ class Bot():
     def __init__(self):
         """initialize bot with app api"""
         self.__api = self._twitter_init()
-        self.__topics = []
-
+        self.__topics = {}
+        
     #helper methods/getter/setter
     
     def _twitter_init(self):
@@ -25,11 +25,13 @@ class Bot():
 
         return tweepy.API(auth)
 
-    def _set_topics(self, topics):
-        if len(self.__topics) == 0:
-            self.__topics = topics
-        else:
-            self.__topics += topics
+    def _add_topics(self, topics):
+        for each in topics:
+            try:
+                if not self.__topics[each]:
+                    self.__topics[each] = []
+            except:
+                pass
             
     #class methods
 
@@ -39,10 +41,25 @@ class Bot():
 
         try:
             topics = wikipedia.search(topic)
-            self._set_topics(topics)
+            self._add_topics(topics)
         except:
             pass
-                
+
+    def find_quotes(self):
+        """find quotes for search terms in topic dict. filters for less than 
+        120 characters"""
+
+        for key, value in self.__topics:
+            try:
+                if not value:
+                    quotes = wikiquote.quotes(key)
+
+                    for each in quotes:
+                        if len(each) < 121:
+                            self.__topics[key] += [each]
+            except:
+                pass
+            
         
 
 if __name__ == '__main__':
