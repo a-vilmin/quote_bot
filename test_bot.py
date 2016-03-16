@@ -1,31 +1,33 @@
 import tweepy, time, sys, wikiquote
 
-def tweet():
-    if len(quotes[0]) < 121:
-        api.update_status(quotes[0])
-    else:
-        api.update_status("Rustybot Hungry!")
+
+class bot():
+
+    def __init__():
+        """initialize bot with app api"""
+        self.__api = self._twitter_init()
 
 
-CONSUMER_KEY = 'YQNoFyZGGfumxlaEHBbhyhosb'
-CONSUMER_SECRET = 'OslbErkHeoZJ0g6ANx8WewURwyXcIAC09AGihX8XRd7uLEEsp2'
-ACCESS_KEY =  '709895920444243968-KOxIoRW2zk45cjUJ7dlRMlRNXQjMQld'
-ACCESS_SECRET = '1QCnOtzr2FMjXk6sfkXzbjoeq3WR8nRT1lYnZ2ZPZkVBW'
-
-auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
-api = tweepy.API(auth)
 
 
-try:
-    quotes = wikiquote.quotes("Albert Einstein")
-except:
-    pass
+
+    def _twitter_init():
+        """helper method for init bot"""
+        filename = argv[1]
+        txt = open(filename)
+
+        CONSUMER_KEY = filename[0]
+        CONSUMER_SECRET = filename[1]
+        ACCESS_KEY = filename[2]
+        ACCESS_SECRET = filename[3]
+
+        auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+        auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
+
+        return tweepy.API(auth)
 
 
-for each in quotes:
-    if len(each) < 121:
-        print(each)
+        
 
 
 
