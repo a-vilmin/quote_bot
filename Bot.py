@@ -65,16 +65,15 @@ class Bot():
     
     def tweet(self):
         """pull quote out and tweet it"""
-        try:
-            key = sample(list(self.__topics), 1)[0]
+        key = sample(list(self.__topics), 1)[0]
             
-            end = len(self.__topics[key])
-            index = randint(0, end-1)
+        end = len(self.__topics[key])
+        index = randint(0, end-1)
             
-            tweet = self.__topics[key].pop(index)
-            self.__api.update_status(tweet)
-        except:
-            pass
+        tweet = self.__topics[key].pop(index)
+        print(tweet)
+        self.__api.update_status(tweet)
+    
         
 if __name__ == '__main__':
     new_bot = Bot()

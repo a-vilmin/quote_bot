@@ -12,7 +12,7 @@ class AutoBot():
         topics = self.__bot.search_topic()
 
         for each in topics:
-            self.__bot.add_topic(topics)
+            self.__bot.add_topic(each)
 
         while(1):
             self.__bot.tweet()
