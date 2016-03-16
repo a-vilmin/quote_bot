@@ -1,5 +1,5 @@
 from Bot import *
-fromt time import sleep
+from time import sleep
 
 class AutoBot():
     """provides interface for running a rusty_bot in Auto Mode"""
@@ -15,5 +15,5 @@ class AutoBot():
             self.__bot.add_topic(topics)
 
         while(1):
-            new_bot.tweet()
+            self.__bot.tweet()
             sleep(300)
