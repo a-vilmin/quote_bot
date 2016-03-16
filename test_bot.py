@@ -68,8 +68,7 @@ class Bot():
         end = len(self.__topics[key])
         index = randint(0, end-1)
 
-        tweet = self.__topics[key][index]
-
+        tweet = self.__topics[key].pop(index)
         self.__api.update_status(tweet)
 
 if __name__ == '__main__':
