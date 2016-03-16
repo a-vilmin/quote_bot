@@ -3,15 +3,14 @@ import tweepy, time, sys, wikiquote
 
 class bot():
 
-    def __init__():
+    def __init__(self):
         """initialize bot with app api"""
         self.__api = self._twitter_init()
+        self.__topics = []
 
-
-
-
-
-    def _twitter_init():
+    #helper methods/getter/setter
+    
+    def _twitter_init(self):
         """helper method for init bot"""
         filename = argv[1]
         txt = open(filename)
@@ -26,8 +25,28 @@ class bot():
 
         return tweepy.API(auth)
 
+    def _set_topics(self, topics):
+        if len(self.__topics) == 0:
+            self.__topics = topics
+        else:
+            self.__topics += topics
+            
+    #class methods
 
+    def search_topic(self, topic = "computer science"):
+        """runs wikiquote search. adds search terms to topics list. default
+        search term is 'computer science'"""
+        try:
+            topics = wikipedia.search(topic)
+            self._set_topics(topics)
+        except:
+            pass
+                
         
+
+if __name__ == '__main__':
+    new_bot = bot()
+    bot.search_topic()
 
 
 
