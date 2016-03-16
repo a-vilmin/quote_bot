@@ -28,8 +28,8 @@ class Bot():
     def _add_topics(self, topics):
         for each in topics:
             try:
-                if not self.__topics[each]:
-                    self.__topics[each] = []
+                quotes = self.find_quotes(each)
+                self.__topics[each] = quotes              
             except:
                 pass
             
@@ -40,33 +40,30 @@ class Bot():
         search term is 'computer science'"""
 
         try:
-            topics = wikipedia.search(topic)
+            topics = wikiquote.search(topic)
             self._add_topics(topics)
         except:
             pass
 
-    def find_quotes(self):
+    def find_quotes(self, term):
         """find quotes for search terms in topic dict. filters for less than 
         120 characters"""
+        try:
+            tweetable = []
+            quotes = wikiquote.quotes(term)
+            for each in quotes:
+                if len(each) < 121:
+                    tweetable += [each]
 
-        for key, value in self.__topics:
-            try:
-                if not value:
-                    quotes = wikiquote.quotes(key)
-
-                    for each in quotes:
-                        if len(each) < 121:
-                            self.__topics[key] += [each]
-            except:
-                pass
-            
+            return tweetable
+        except:
+            pass                    
         
 
 if __name__ == '__main__':
     new_bot = Bot()
     new_bot.search_topic()
-
-
+    new_bot._print_test()
 
     
 
