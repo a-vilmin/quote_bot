@@ -47,7 +47,7 @@ class Bot():
 
     def search_topic(self, topic = "computer science"):
         """runs wikiquote search. adds search terms to topics list. default
-        search term is 'computer science'"""
+        search term is 'computer science'. returns list of possible searches"""
 
         try:
             topics = wikiquote.search(topic)
