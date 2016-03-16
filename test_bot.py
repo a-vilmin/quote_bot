@@ -1,6 +1,7 @@
 from sys import argv
 import tweepy, wikiquote
-class bot():
+
+class Bot():
 
     def __init__(self):
         """initialize bot with app api"""
@@ -35,6 +36,7 @@ class bot():
     def search_topic(self, topic = "computer science"):
         """runs wikiquote search. adds search terms to topics list. default
         search term is 'computer science'"""
+
         try:
             topics = wikipedia.search(topic)
             self._set_topics(topics)
@@ -44,8 +46,8 @@ class bot():
         
 
 if __name__ == '__main__':
-    new_bot = bot()
-    bot.search_topic()
+    new_bot = Bot()
+    new_bot.search_topic()
 
 
 
