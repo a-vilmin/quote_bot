@@ -1,4 +1,5 @@
 from sys import argv
+from random import sample, randint
 import tweepy, wikiquote
 
 class Bot():
@@ -13,12 +14,13 @@ class Bot():
     def _twitter_init(self):
         """helper method for init bot"""
         filename = argv[1]
-        txt = open(filename)
+        with open(filename) as f:
+            content = [x.strip('\n') for x in f.readlines()]
 
-        CONSUMER_KEY = filename[0]
-        CONSUMER_SECRET = filename[1]
-        ACCESS_KEY = filename[2]
-        ACCESS_SECRET = filename[3]
+        CONSUMER_KEY = content[0]
+        CONSUMER_SECRET = content[1]
+        ACCESS_KEY = content[2]
+        ACCESS_SECRET = content[3]
 
         auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
         auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
@@ -58,12 +60,22 @@ class Bot():
             return tweetable
         except:
             pass                    
-        
+
+    def tweet(self):
+        """pull quote out and tweet it"""
+        key = sample(list(self.__topics), 1)[0]
+
+        end = len(self.__topics[key])
+        index = randint(0, end-1)
+
+        tweet = self.__topics[key][index]
+
+        self.__api.update_status(tweet)
 
 if __name__ == '__main__':
     new_bot = Bot()
     new_bot.search_topic()
-    new_bot._print_test()
+    new_bot.tweet()
 
     
 
