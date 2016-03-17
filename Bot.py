@@ -1,3 +1,7 @@
+#Bot.py
+#Adam Vilmin
+#2016-March- crappyoats@gmail.com
+
 from sys import argv
 from random import sample, shuffle
 import tweepy, wikiquote
@@ -40,8 +44,6 @@ class Bot():
             return tweetable
         except:
             pass                    
-
-
             
     #class methods
 
@@ -74,6 +76,8 @@ class Bot():
             self.__api.update_status(tweet)
         except:
             pass
+
+    
         
 if __name__ == '__main__':
     new_bot = Bot()
