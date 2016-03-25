@@ -77,7 +77,13 @@ class Bot():
         except:
             pass
 
-    
+    def tweet_at(self):
+        """detects tweet at rusty_bot and tweets back"""
+        tweets_at = self.__api.search(q="@RustyBot9000")
+
+        for reply in tweets_at:
+            user = reply.user.screen_name
+            
         
 if __name__ == '__main__':
     new_bot = Bot()

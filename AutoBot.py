@@ -1,22 +1,21 @@
-#Bot.py
+#AutoBot.py
 #Adam Vilmin
 #2016-March- crappyoats@gmail.com
 
 from Bot import *
 from time import sleep
 
-class AutoBot():
+class AutoBot(Bot):
     """provides interface for running a rusty_bot in Auto Mode"""
 
-    def __init__(self, bot):
-        multiprocessing.Process.__init__(self)
-        self.__bot = bot
+    def __init__(self):
+        super().__init__()
 
     def main_routine(self):
         """runs bot in auto mode"""
         self._pull_quotes()
         while(1):
-            self.__bot.tweet()
+            self.tweet()
             sleep(600)
 
     def _pull_quotes(self):
@@ -25,9 +24,9 @@ class AutoBot():
 
         while len(searchs) > 0:
             t = searchs.pop()
-            topics = self.__bot.search_topic(t)
+            topics = self.search_topic(t)
 
             for each in topics:
-                self.__bot.add_topic(each)
+                self.add_topic(each)
 
         
